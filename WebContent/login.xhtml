@@ -21,7 +21,7 @@
 			<h:outputText value="Senha" />
 	        <h:inputSecret value="#{loginBean.password}" />
 	        <!-- <p:password id="inlineFeedback" value="#{passwordView.password}" feedback="true" inline="true" /> -->
-			<h:commandButton value="Submit" type="submit" action="#{index}" />
+			<h:commandButton value="Submit" type="submit" action="#{loginBean.login()}" />
 
 		</h:panelGrid>
 	</h:form>

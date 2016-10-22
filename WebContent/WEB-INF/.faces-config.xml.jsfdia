@@ -3,11 +3,16 @@
  <PROCESS-ITEM NAME="rules:login.xhtml" PATH="login.xhtml"
   SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:login.xhtml:0" NAME="item" PATH="login.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="password:#{index}:index.xhtml" NAME="output"
-    PATH="index.xhtml" TARGET="rules:index.xhtml"
-    TITLE="#{index}:password" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="success:#{loginBean.login()}:index.xhtml"
+    NAME="output" PATH="index.xhtml" TARGET="rules:index.xhtml"
+    TITLE="#{loginBean.login()}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="failure:#{loginBean.login()}:error.xhtml"
+    NAME="output1" PATH="error.xhtml" TARGET="rules:error.xhtml"
+    TITLE="#{loginBean.login()}:failure" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:index.xhtml" PATH="index.xhtml"
   SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:error.xhtml" PATH="error.xhtml"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

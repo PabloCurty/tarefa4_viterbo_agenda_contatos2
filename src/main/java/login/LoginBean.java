@@ -26,7 +26,7 @@ public class LoginBean implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public String login() {
+	public String login(){
 		if (usuario.equals("pablo") && password.equals("123456")) {
 			return "success";
 		}else{
