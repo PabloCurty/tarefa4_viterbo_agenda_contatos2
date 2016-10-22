@@ -1,0 +1,44 @@
+﻿Backlog da Tarefa 4 
+Fazer uma aplicação baseada em JSF: 
+Que implementa uma agenda de contatos online. 
+
+
+tarefa 1:
+Configurações e teste
+
+1.1 Configurar projeto web jsf jpa/hibernate e testar a primeira persistencia no banco.
+
+
+
+tarefa 2:
+o registro e login de diferentes usuários, 
+cada um com acesso exclusivo à sua própria agenda; 
+
+2.1 Implementar login 
+	2.1.1 Criar Classe pessoa um pra um com usuario de login e senha com jpa hibernate para banco
+	2.1.1 Salvar em banco de dados usuario e senha ligados a uma pessoa
+
+2.2 Implementar perfil de login
+	2.2.1 Criar a classe contato (nome, endereço, e-mail, telefones) com jpa hibernate para banco
+	2.2.2 Ter em cada contato o identificador da pessoa que tem acesso
+
+
+tarefa 3:
+
+3.1 Implementar o controlador(service) chamando Model(banco)
+	3.1.1 - Criar classe endereço que deve conter logradouro (rua, avenida, etc), 
+		complemento, bairro, cidade, UF e CEP com jpa hibernate ;
+
+	3.1.2 - Criar classe telefone que deve conter tipo (celular, fixo), 
+		operadora, DDI, DDD e o número com jpa hibernate;
+
+	3.1.3 - Implementar controlador a busca de contatos (por nome, endereço, e-mail, telefones);
+	3.1.4 - Implementar Dao da busca contato (por nome, endereço, e-mail, telefones);
+	
+	3.1.5 - Implementar controlador da busca da listagem dos contatos (ordenado por nome) 
+		para ser exibido na vista logo após o login;
+	3.1.6 - Implementar  Dao da busca listagem de contatos ( ordenado por nome);
+		
+	3.1.7 - Implementar o controlador da edição e remoção de contatos. 
+	3.1.8 - Implementar o Dao da edição e remoção de contatos.
+
