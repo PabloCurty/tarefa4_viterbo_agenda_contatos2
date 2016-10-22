@@ -10,9 +10,20 @@
 <title>Insert title here</title>
 </h:head>
 <h:body>
-	<h3>Hello JQM</h3>
-    <h:outputText value="Teste" />
-	<p:outputLabel value="Olá prime faces"/>
-	<p:spinner /> 
+	<h:form>
+		<h:outputText value="#{editor.value}" />
+	</h:form>
+	
+	<h:form>
+		<h:panelGrid columns="2">
+	    	<h:outputText value="Usuário" />
+			<h:inputText value="#{loginBean.usuario}"/>
+			<h:outputText value="Senha" />
+	        <h:inputSecret value="#{loginBean.password}" />
+	        <!-- <p:password id="inlineFeedback" value="#{passwordView.password}" feedback="true" inline="true" /> -->
+			<h:commandButton value="Submit" type="submit" action="#{index}" />
+
+		</h:panelGrid>
+	</h:form>
 </h:body>
 </html>
