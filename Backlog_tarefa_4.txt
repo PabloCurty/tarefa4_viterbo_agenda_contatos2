@@ -6,7 +6,8 @@ Que implementa uma agenda de contatos online.
 tarefa 1:
 Configurações e teste
 
-1.1 Configurar projeto web jsf jpa/hibernate e testar a primeira persistencia no banco.
+1.1 Configurar o projeto mven JSF primefaces no eclipse e testar pagina inicial subindo (PABLO -- FEITO)
+1.2 Configurar projeto web jsf jpa/hibernate e testar a primeira persistencia no banco.
 
 
 
