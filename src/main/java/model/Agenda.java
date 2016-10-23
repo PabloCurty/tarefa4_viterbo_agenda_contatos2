@@ -4,13 +4,13 @@ import java.util.Set;
 
 public class Agenda 
 {
-	private AgendaDono dono;
+	private Usuario dono;
 	Set<Contato> contatos;
 	
-	public AgendaDono getDono() {
+	public Usuario getDono() {
 		return dono;
 	}
-	public void setDono(AgendaDono dono) {
+	public void setDono(Usuario dono) {
 		this.dono = dono;
 	}
 	public Set<Contato> getContatos() {
