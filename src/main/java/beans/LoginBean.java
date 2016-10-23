@@ -1,15 +1,27 @@
-package login;
+package beans;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
+/**
+ * RequestScoped
+ *Instanciado para cada requisição/resposta
+ **/
 @ManagedBean(name = "loginBean")
+@RequestScoped
 public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String usuario;
 	private String password;
 	
+	private final String message = "Entre com usuário e senha para acessar seus contatos";
+	
+	public String getMessage() {
+		return message;
+	}
+
 	public String getPassword() {
 		return password;
 	}
