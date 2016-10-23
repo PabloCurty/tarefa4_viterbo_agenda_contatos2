@@ -5,7 +5,7 @@
 	<artifactId>agendaContatos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>agendaContatos</name>
-	<description>Fazer uma aplicação baseada em JSF que implementa uma agenda de contatos online com persistencia jpa</description>
+	<description>Fazer uma aplicação baseada em JSF que implementa uma agenda de contatos online com persistencia JPA</description>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
