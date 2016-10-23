@@ -77,6 +77,8 @@ public class Usuario implements Serializable {
 	private Agenda agenda;
 
 	/*------------- construtor ------------- */
+	
+	
 
 	public Usuario(long idUsusario, String nome, String email, String username, String password, Agenda agenda) {
 		super();
@@ -88,6 +90,10 @@ public class Usuario implements Serializable {
 		this.agenda = agenda;
 	}
 	
+	public Usuario() {
+		super();
+	}
+
 	public Usuario(String nome_usuario, String email, String username, String password, Agenda agenda) {
 		super();
 		this.nome_usuario = nome_usuario;

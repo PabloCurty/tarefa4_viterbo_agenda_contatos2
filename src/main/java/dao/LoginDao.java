@@ -1,8 +1,7 @@
 package dao;
 
-import model.Usuario;
 
 public interface LoginDao {
 
-	public Usuario autentica(String usuario, String password);
+	public long pegaLogin(String usuario, String password);
 }

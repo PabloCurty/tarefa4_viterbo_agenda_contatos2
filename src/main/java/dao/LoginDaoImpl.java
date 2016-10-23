@@ -5,9 +5,9 @@ import model.Usuario;
 public class LoginDaoImpl implements LoginDao{
 
 	@Override
-	public Usuario autentica(String usuario, String password) {
+	public long pegaLogin(String usuario, String password) {
 		// TODO Auto-generated method stub
-		return null;
+		return 1;
 	}
 
 }
