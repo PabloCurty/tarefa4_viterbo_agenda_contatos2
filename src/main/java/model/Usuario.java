@@ -10,14 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-//TODO discutir abaixo
-//AgendaDono deve conter seu username e password para que o mesmo possa muda-lo caso queira
-//Uma classe login talvez nao seja necessaria, uma vez que isso eh uma consulta ao banco
 
 @Entity
 @Table(name = "USUARIO")
@@ -36,6 +31,8 @@ public class Usuario implements Serializable {
 	private String nome_usuario;
 	@Column(name = "EMAIL_USUARIO", nullable = false)
 	private String email;
+	
+	/*TODO ver como coloca username unique*/
 	@Column(name = "USERNAME_USUARIO", nullable = false)
 	private String username;
 	@Column(name = "PASSWORD_USUARIO", nullable = false)
@@ -64,9 +61,18 @@ public class Usuario implements Serializable {
 	 * removida.
 	 * 
 	 * 
+	 * // @JoinColumn(name=”USER_ID”, nullable=false) – define qual é a coluna mapeada 
+	 * para fazer a união na consulta. É indicado o nome da coluna através do parâmetro 
+	 * “name” e que esse campo não pode ser nulo pelo parâmetro “nullable”.
+	 * 
+	 * @PrimaryKeyJoinColumn – essa anotação indica ao JPA que, para encontrar um objeto 
+	 * AGENDA basta procurar um registro com o mesmo ID do USUARIO. Ou seja, indica que 
+	 * uma AGENDA vai ter o mesmo ID que seu USUARIO.
+	 * 
 	 */
 
 	@OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
+	// @JoinColumn(name=”AGENDA_ID”, nullable=false)
 	@PrimaryKeyJoinColumn
 	private Agenda agenda;
 
@@ -76,6 +82,15 @@ public class Usuario implements Serializable {
 		super();
 		this.id_ususario = idUsusario;
 		this.nome_usuario = nome;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.agenda = agenda;
+	}
+	
+	public Usuario(String nome_usuario, String email, String username, String password, Agenda agenda) {
+		super();
+		this.nome_usuario = nome_usuario;
 		this.email = email;
 		this.username = username;
 		this.password = password;

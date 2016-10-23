@@ -5,26 +5,24 @@
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:p="http://primefaces.org/ui">
-<h:head>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Insert title here</title>
-</h:head>
-<h:body>
-	<h:form>
-		<h:outputText value="#{loginBean.message}" />
-	</h:form>
-	
+</head>
+<body>
+	<h1>cadastro</h1>
 	<h:form>
 		<h:panelGrid columns="2">
-	    	<h:outputText value="Usuário" />
-			<h:inputText value="#{loginBean.usuario}"/>
-			<h:outputText value="Senha" />
-	        <h:inputSecret value="#{loginBean.password}" />
-	        <!-- <p:password id="inlineFeedback" value="#{passwordView.password}" feedback="true" inline="true" /> -->
-			<h:commandButton value="Submit" type="submit" action="#{loginBean.login()}" />
-			<h:commandLink action="cadastro" value="Cadastrar-se" />
+			<h:outputText value="nome_usuario" />
+			<h:inputText value="#{cadastroUsuarioBean.nome_usuario}"/>
+			<h:outputText value="email" />
+			<h:inputText value="#{cadastroUsuarioBean.email}"/>
+			<h:outputText value="username" />
+			<h:inputText value="#{cadastroUsuarioBean.username}"/>
+			<h:outputText value="password" />
+			<h:inputSecret value="#{cadastroUsuarioBean.password}" />
+			<h:commandButton value="Submit" type="submit" action="#{cadastroUsuarioBean.cadastraUsuario()}" />
 		</h:panelGrid>
 	</h:form>
-	
-</h:body>
+</body>
 </html>
