@@ -11,9 +11,13 @@
 </head>
 <body>
 
-	<h1>Bem vindo: </h1>
-	<!-- Password : <h:outputText value="#{loginBean.password}" />  -->
-	User : <h:outputText value="#{loginBean.usuario}" /> 
+	Bem vindo : <h:outputText value="#{loginBean.usuario}" /> 
+	
+	<h:form>
+		<h:panelGrid columns="4">
+			<h:commandLink action="listaContatos" value="Lista de Contatos" />
+		</h:panelGrid>
+	</h:form>		
 
 </body>
 </html>

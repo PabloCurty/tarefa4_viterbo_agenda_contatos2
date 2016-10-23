@@ -1,11 +1,16 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Map;
 
+import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import controller.ControleCadastroUsuario;
+import exception.UsuarioExistenteException;
 
 @ManagedBean(name = "cadastroUsuarioBean")
 @RequestScoped
@@ -46,9 +51,24 @@ public class CadastroUsuarioBean implements Serializable{
 		return serialVersionUID;
 	}
 	
+	
 	public String cadastraUsuario(){
-		ControleCadastroUsuario ccu = new ControleCadastroUsuario();
-		String acao = ccu.cadastraUsuario(this);
-		return acao;
+		LoginBean loginBean = null; 
+		try {
+			ControleCadastroUsuario ccu = new ControleCadastroUsuario();
+			String acao = ccu.cadastraUsuario(this);
+			FacesContext fc = FacesContext.getCurrentInstance();
+		    if(fc!=null){
+		         ELContext elContext = fc.getELContext();
+		         loginBean =(LoginBean) elContext.getELResolver().getValue(elContext, null, "loginBean");
+		    }
+			loginBean.setUsuario(username);
+		    loginBean.setPassword(password);
+		    return acao;
+		} catch (UsuarioExistenteException e) {
+			e.printStackTrace();
+			return "failure";	
+		} 
+		
 	}
 }

@@ -1,15 +1,18 @@
 package beans;
 
 import java.io.Serializable;
+
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+
+import controller.ControleLogin;
 
 /**
  * RequestScoped
  *Instanciado para cada requisição/resposta
  **/
 @ManagedBean(name = "loginBean")
-@RequestScoped
+@SessionScoped
 public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,11 +42,14 @@ public class LoginBean implements Serializable {
 	}
 
 	public String login(){
-		if (usuario.equals("pablo") && password.equals("123456")) {
+		ControleLogin cl = new ControleLogin();
+		cl.login(usuario, password);
+		/*if (usuario.equals("pablo") && password.equals("123456")) {
 			return "success";
 		}else{
 			return "failure";
-		}
+		}*/
+		return "success";
 	}
 
 }
