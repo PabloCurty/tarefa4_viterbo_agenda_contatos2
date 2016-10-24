@@ -8,13 +8,19 @@ import service.LoginService;
 
 public class ControleLogin {
 	
-	@Inject
-	LoginService loginService;
+	//@Inject
+	//LoginService loginService;
 	
 	public String login (String usuario, String password){
 		try {
-			loginService.autentica(usuario, password);
-			return "success";
+			//LoginService loginService = new LoginService();
+			//long numero = loginService.autentica(usuario, password);
+			//if(numero == 1){
+				return "success";
+			//}else{
+			//	return "failure";
+			//}
+			
 		} catch (UsernameException e) {
 			throw new UsernameException("usuario errado");
 		} catch ( PasswordException ex) {

@@ -14,6 +14,22 @@ public class Contato
 	private String telefone;
 	private String celular;
 	
+	public Contato(String logradouro, String complemento, String bairro, String cidade, String uf, String cep,
+			String nome, String email, String telefone, String celular) {
+		super();
+		this.logradouro = logradouro;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.uf = uf;
+		this.cep = cep;
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+		this.celular = celular;
+	}
+	
+	
 	public String getNome() {
 		return nome;
 	}

@@ -25,8 +25,10 @@ public class AgendaBean implements Serializable{
 		this.contatos = contatos;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Set<Contato> populaContatos(){
+		Contato cont = new Contato("", "", "", "", "", "", "Rodrigo Nunes", "", "", "");
+		contatos.add(cont);
+		return contatos;
 	}
 	
 }
