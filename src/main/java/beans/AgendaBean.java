@@ -1,8 +1,8 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
@@ -15,20 +15,16 @@ public class AgendaBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	Set<Contato> contatos;
+	List<Contato> contatos = new ArrayList<Contato>();
 
-	public Set<Contato> getContatos() {
-		return contatos;
-	}
-
-	public void setContatos(Set<Contato> contatos) {
-		this.contatos = contatos;
-	}
-
-	public Set<Contato> populaContatos(){
+	public List<Contato> getContatos() {
 		Contato cont = new Contato("", "", "", "", "", "", "Rodrigo Nunes", "", "", "");
-		contatos.add(cont);
-		return contatos;
+		this.contatos.add(cont);
+		return this.contatos;
+	}
+
+	public void setContatos(List<Contato> contatos) {
+		this.contatos = contatos;
 	}
 	
 }

@@ -64,11 +64,11 @@
 			<version>5.1.9</version>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>corejava</groupId>
 			<artifactId>console</artifactId>
 			<version>1.0</version>
-		</dependency>
+		</dependency>  -->
 
 		<dependency>
 			<groupId>org.hibernate</groupId>

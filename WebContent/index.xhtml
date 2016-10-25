@@ -16,10 +16,15 @@
 	<h:outputText value="#{loginBean.usuario}" />
 
 	<h:form>
-		<h:panelGrid columns="1">
-			<c:forEach var="contato" itens="#{agendaBean.populaContatos()}" >
-				<h:outputText value="#{contato.nome}"/>
-			</c:forEach>
+		<h:panelGrid columns="2">
+			<!-- <c:forEach var="contato" itens="#{contatos}">
+				<h:outputText value="#{contato.nome}" />
+			</c:forEach> -->
+			<h:dataTable value="#{agendaBean.getContatos()}" var="contato">
+				<h:outputText value="#{contato.getNome()}" />
+			</h:dataTable>
+			<h:commandButton value="Create new item" action="..." />
+			<h:commandButton value="Delete an item" action="..." />
 		</h:panelGrid>
 	</h:form>
 
