@@ -1,12 +1,10 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.Map;
 
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import controller.ControleCadastroUsuario;
@@ -50,7 +48,6 @@ public class CadastroUsuarioBean implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
 	
 	public String cadastraUsuario(){
 		LoginBean loginBean = null; 

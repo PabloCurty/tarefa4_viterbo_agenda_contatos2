@@ -52,4 +52,11 @@ public class LoginBean implements Serializable {
 		//return "success";
 	}
 
+	public String cleanLogin()
+	{
+		this.password = null;
+		this.usuario = null;
+		return "login.xhtml";
+	}
+	
 }
