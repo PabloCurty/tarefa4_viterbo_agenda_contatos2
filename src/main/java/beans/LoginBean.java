@@ -2,14 +2,14 @@ package beans;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import controller.ControleLogin;
 
 /**
- * RequestScoped
- *Instanciado para cada requisição/resposta
+ TODO apos insert de contato, login nao aparece mais em index
  **/
 @ManagedBean(name = "loginBean")
 @SessionScoped
@@ -56,6 +56,8 @@ public class LoginBean implements Serializable {
 	{
 		this.password = null;
 		this.usuario = null;
+		//TODO verificar se eh necessario
+		//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("loginBean", loginBean);
 		return "login.xhtml";
 	}
 	

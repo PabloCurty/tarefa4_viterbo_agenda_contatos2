@@ -7,7 +7,7 @@
 	  xmlns:p="http://primefaces.org/ui">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Insert title here</title>
+<title>Cadastra contato</title>
 </head>
 <body>
 	<h1>Cadastra contato</h1>
@@ -20,7 +20,7 @@
 			<h:outputText value="endereco" />
 			<h:inputText value="#{contatoBean.endereco}"/>
 			<h:outputText value="telefone" />
-			<h:inputSecret value="#{contatoBean.telefone}" />
+			<h:inputText value="#{contatoBean.telefone}" />
 			<h:commandButton value="Submit" type="submit" action="#{agendaBean.cadastra(contatoBean)}" />
 		</h:panelGrid>
 	</h:form>

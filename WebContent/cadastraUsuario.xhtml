@@ -7,21 +7,21 @@
 	  xmlns:p="http://primefaces.org/ui">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Insert title here</title>
+<title>Cadastra Usuario</title>
 </head>
 <body>
 	<h1>Cadastra Usuario</h1>
 	<h:form>
 		<h:panelGrid columns="2">
-			<h:outputText value="nome_usuario" />
-			<h:inputText value="#{cadastroUsuarioBean.nome_usuario}"/>
+			<h:outputText value="nome usuario" />
+			<h:inputText value="#{usuarioBean.nome}"/>
 			<h:outputText value="email" />
-			<h:inputText value="#{cadastroUsuarioBean.email}"/>
+			<h:inputText value="#{usuarioBean.email}"/>
 			<h:outputText value="username" />
-			<h:inputText value="#{cadastroUsuarioBean.username}"/>
+			<h:inputText value="#{usuarioBean.username}"/>
 			<h:outputText value="password" />
-			<h:inputSecret value="#{cadastroUsuarioBean.password}" />
-			<h:commandButton value="Submit" type="submit" action="#{cadastroUsuarioBean.cadastraUsuario()}" />
+			<h:inputSecret value="#{usuarioBean.password}" />
+			<h:commandButton value="Submit" type="submit" action="#{usuarioBean.cadastraUsuario()}" />
 		</h:panelGrid>
 	</h:form>
 </body>

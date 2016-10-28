@@ -2,41 +2,45 @@ package beans;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.view.ViewScoped;
+
+//ViewScope
+//As soon as the user navigates to a different page, the bean goes out of scope.
 
 @ManagedBean(name = "contatoBean")
-@RequestScoped
+@ViewScoped
 public class ContatoBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
 	private String nome;
-	public ContatoBean(Long id, String nome, String email, String endereco, String telefone, boolean ativo) {
+	private String email;
+	private String endereco;
+	private String telefone;
+	boolean ativo;
+	
+	public ContatoBean(String nome, String email, String endereco, String telefone) {
 		super();
-		this.id = id;
+		//this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.endereco = endereco;
 		this.telefone = telefone;
-		this.ativo = ativo;
+		this.ativo = true;
 	}
 	
-	public ContatoBean(String nome, String telefone, boolean ativo) {
+	public ContatoBean(String nome, String telefone) {
+		super();
 		this.nome = nome;
 		this.telefone = telefone;
-		this.ativo = ativo;
+		this.ativo = true;
 	}
 	
 	public ContatoBean()
 	{
 		
 	};
-
-	private String email;
-	private String endereco;
-	private String telefone;
-	boolean ativo;
 	
 	public Long getId() {
 		return id;

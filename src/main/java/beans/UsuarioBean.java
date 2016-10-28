@@ -10,22 +10,22 @@ import javax.faces.context.FacesContext;
 import controller.ControleCadastroUsuario;
 import exception.UsuarioExistenteException;
 
-@ManagedBean(name = "cadastroUsuarioBean")
+@ManagedBean(name = "usuarioBean")
 @RequestScoped
-public class CadastroUsuarioBean implements Serializable{
+public class UsuarioBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private String nome_usuario;
+	private String nome;
 	private String email;
 	private String username;
 	private String password;
 	
-	public String getNome_usuario() {
-		return nome_usuario;
+	public String getNome() {
+		return nome;
 	}
-	public void setNome_usuario(String nome_usuario) {
-		this.nome_usuario = nome_usuario;
+	public void setNome(String nome_usuario) {
+		this.nome = nome_usuario;
 	}
 	public String getEmail() {
 		return email;
@@ -55,12 +55,18 @@ public class CadastroUsuarioBean implements Serializable{
 			ControleCadastroUsuario ccu = new ControleCadastroUsuario();
 			String acao = ccu.cadastraUsuario(this);
 			FacesContext fc = FacesContext.getCurrentInstance();
+			ELContext elContext;
 		    if(fc!=null){
-		         ELContext elContext = fc.getELContext();
+		    	elContext = fc.getELContext();
 		         loginBean =(LoginBean) elContext.getELResolver().getValue(elContext, null, "loginBean");
 		    }
 			loginBean.setUsuario(username);
 		    loginBean.setPassword(password);
+		    
+		    //elContext.getELResolver().setValue(elContext, loginBean, "loginBean");
+		    
+		    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("loginBean", loginBean);
+		    
 		    return acao;
 		} catch (UsuarioExistenteException e) {
 			e.printStackTrace();

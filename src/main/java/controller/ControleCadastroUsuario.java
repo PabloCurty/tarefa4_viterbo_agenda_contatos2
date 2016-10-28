@@ -1,16 +1,16 @@
 package controller;
 
-import beans.CadastroUsuarioBean;
+import beans.UsuarioBean;
 import exception.UsuarioExistenteException;
 import model.Agenda;
 import model.Usuario;
 
 public class ControleCadastroUsuario {
 
-	public String cadastraUsuario(CadastroUsuarioBean cadastroUsuarioBean) throws UsuarioExistenteException{
+	public String cadastraUsuario(UsuarioBean cadastroUsuarioBean) throws UsuarioExistenteException{
 		
 		try {
-			Usuario user = new Usuario(cadastroUsuarioBean.getNome_usuario(), 
+			Usuario user = new Usuario(cadastroUsuarioBean.getNome(), 
 									   cadastroUsuarioBean.getEmail(), 
 									   cadastroUsuarioBean.getUsername(), 
 									   cadastroUsuarioBean.getPassword(), 
