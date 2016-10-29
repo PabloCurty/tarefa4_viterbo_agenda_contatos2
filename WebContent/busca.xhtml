@@ -7,9 +7,11 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Busca</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<!--  <h:outputStylesheet library="css" name="table-style.css"  />  -->
+	<title>Busca</title>
 </head>
+
 <body>
 	
 	<h:form>
@@ -30,23 +32,34 @@
 	</h:form>
 
 	<h:form>
-		<h:dataTable value="#{buscaBean.contatos}" var="contato">
-			<h:column>
-				<h:selectBooleanCheckbox 
-				value="#{contato.ativo}" />
-			</h:column>
+		<h:dataTable value="#{buscaBean.contatos}" var="contato"
+			styleClass="order-table"
+    		headerClass="order-table-header"
+    		rowClasses="order-table-odd-row,order-table-even-row"
+    	>
 			<h:column>
 				<f:facet name="header">Nome</f:facet>
-				#{contato.nome}
+				<!-- #{contato.nome}-->
+				<h:inputText value="#{contato.nome}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.nome}" rendered="#{not contato.editavel}" />
 			</h:column>
+			
 			<h:column>
 				<f:facet name="header">Telefone</f:facet>
-				#{contato.telefone}
+				<!-- #{contato.telefone}-->
+				<h:inputText value="#{contato.telefone}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.telefone}" rendered="#{not contato.editavel}" />
 			</h:column>
+			<h:column>
+    		<f:facet name="header">Ação</f:facet>
+				<h:commandLink value="Editar" action="#{agendaBean.editAction(contato)}"
+                                       rendered="#{not contato.editavel}" />
+                <h:commandLink value="Remover" action="#{agendaBean.removeAction(contato)}"
+                                       rendered="#{not contato.editavel}" />
+			</h:column>
+			
 		</h:dataTable>
-		<h:commandButton value="Criar novo contato" action="cadastraContato" />
-		<h:commandButton value="Remover contatos" action="#{agendaBean.remove()}" />
-		
+		<h:commandButton value="Salvar mudancas" action="#{buscaBean.saveAction}" />
 		<h:commandButton value="Retornar à agenda" action="index.xhtml" />
 	</h:form>
 

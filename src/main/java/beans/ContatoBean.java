@@ -32,9 +32,11 @@ public class ContatoBean implements Serializable{
 	private String operadora;
 	private String ddi;
 	private String ddd;
-	boolean ativo;
-
 	
+	/* CONTROLE */
+	//controla se deve ser editavel na tela
+	boolean editavel;
+
 	public ContatoBean(Long id, String nome, String email, String logradouro, String complemento, String bairro,
 			String cidade, String uf, String cep, String telefone, String celular, String operadora, String ddi,
 			String ddd) {
@@ -53,20 +55,29 @@ public class ContatoBean implements Serializable{
 		this.operadora = operadora;
 		this.ddi = ddi;
 		this.ddd = ddd;
-		this.ativo = true;
+		this.editavel = false;
 	}
 
 	public ContatoBean(String nome, String telefone) {
 		super();
 		this.nome = nome;
 		this.telefone = telefone;
-		this.ativo = true;
+		this.editavel = false;
 	}
 	
 	public ContatoBean()
 	{
 		
 	};
+	
+
+	public boolean isEditavel() {
+		return editavel;
+	}
+
+	public void setEditavel(boolean editavel) {
+		this.editavel = editavel;
+	}
 	
 	public String getLogradouro() {
 		return logradouro;
@@ -153,13 +164,6 @@ public class ContatoBean implements Serializable{
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-	public boolean isAtivo() {
-		return ativo;
-	}
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
 	}
 	public String getTelefone() {
 		return telefone;

@@ -102,4 +102,19 @@ public class BuscaBean implements Serializable{
 			}
 		}
 	}
+	
+	public String saveAction() {
+
+		//get all existing value but set "editable" to false
+		for (ContatoBean contato : contatos){
+			contato.setEditavel(false);
+		}
+		
+		//TODO todos os contatos que eu editar no busca tem que se refletir em agendaBean
+		//Caso a ideia do pablo de sempre buscar da base seja seguida, isso nao sera problema
+		
+		//return to current page
+		return null;
+
+	}
 }

@@ -37,7 +37,6 @@ public class AgendaBean implements Serializable{
 	public String cadastra(ContatoBean contatoBean)
 	{
 		ContatoBean contato = contatoBean;
-		contato.setAtivo(true);
 		//TODO
 		//No caso de recarregar a tela, esta adicionando de novo
 		//O que esta abaixo nao resolve
@@ -53,24 +52,34 @@ public class AgendaBean implements Serializable{
 		return "index.xhtml";
 	}
 	
-	public String remove()
-	{
+	public String saveAction() {
+
+		//get all existing value but set "editable" to false
+		for (ContatoBean contato : contatos){
+			contato.setEditavel(false);
+		}
+		//return to current page
+		return null;
+
+	}
+
+	public String editAction(ContatoBean contato) {
+		contato.setEditavel(true);
+		return null;
+	}
+	
+	public String removeAction(ContatoBean contato) {
 		Iterator<ContatoBean> iter = this.contatos.iterator();
-	
+		
 		while (iter.hasNext()) {
-		    ContatoBean contato = iter.next();
+		    ContatoBean contato_ = iter.next();
 	
-		    if (!contato.isAtivo())
+		    if (contato_.equals(contato))
 			{
 		    	iter.remove();
 			}
 		}
-		return "index.xhtml";
+		return null;
 	}
-	
-	//TODO finish editaContato
-	public String editaContato(ContatoBean contato)
-	{
-		return "editaContato.xhtml";
-	}
+
 }
