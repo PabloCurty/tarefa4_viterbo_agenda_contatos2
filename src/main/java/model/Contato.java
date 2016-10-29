@@ -2,6 +2,11 @@ package model;
 
 public class Contato 
 {
+	private Long id;
+	private String nome;
+	private String email;
+	
+	/* ENDERECO */
 	private String logradouro;
 	private String complemento;
 	private String bairro;
@@ -9,27 +14,30 @@ public class Contato
 	private String uf;
 	private String cep;
 	
-	private String nome;
-	private String email;
+	/* TELEFONE */
 	private String telefone;
 	private String celular;
+	private String operadora;
+	private String ddi;
+	private String ddd;
 	
-	public Contato(String logradouro, String complemento, String bairro, String cidade, String uf, String cep,
-			String nome, String email, String telefone, String celular) {
+	public Contato(String nome, String email, String logradouro, String complemento, String bairro, String cidade,
+			String uf, String cep, String telefone, String celular, String operadora, String ddi, String ddd) {
 		super();
+		this.nome = nome;
+		this.email = email;
 		this.logradouro = logradouro;
 		this.complemento = complemento;
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.uf = uf;
 		this.cep = cep;
-		this.nome = nome;
-		this.email = email;
 		this.telefone = telefone;
 		this.celular = celular;
+		this.operadora = operadora;
+		this.ddi = ddi;
+		this.ddd = ddd;
 	}
-	
-	
 	public String getNome() {
 		return nome;
 	}
@@ -89,6 +97,30 @@ public class Contato
 	}
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getOperadora() {
+		return operadora;
+	}
+	public void setOperadora(String operadora) {
+		this.operadora = operadora;
+	}
+	public String getDdi() {
+		return ddi;
+	}
+	public void setDdi(String ddi) {
+		this.ddi = ddi;
+	}
+	public String getDdd() {
+		return ddd;
+	}
+	public void setDdd(String ddd) {
+		this.ddd = ddd;
 	}
 	
 	

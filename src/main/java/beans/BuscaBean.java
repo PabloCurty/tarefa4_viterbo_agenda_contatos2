@@ -6,25 +6,54 @@ import java.util.List;
 
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "buscaBean")
-@ViewScoped
+@SessionScoped
 public class BuscaBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	private String texto;
-	List<ContatoBean> contatos = new ArrayList<ContatoBean>();
+	private String tipo;
+	private List<ContatoBean> contatos = new ArrayList<ContatoBean>();
+
+	public List<ContatoBean> getContatos() {
+		return contatos;
+	}
+
+	public void setContatos(List<ContatoBean> contatos) {
+		this.contatos = contatos;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	
+	public String getTexto() {
+		return texto;
+	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
 	public String busca(){
 		AgendaBean agendaBean = null; 
+		if(!this.contatos.isEmpty())
+		{
+			this.contatos.clear();
+		}
+		
 		try {
 			
 			FacesContext fc = FacesContext.getCurrentInstance();
@@ -34,15 +63,43 @@ public class BuscaBean implements Serializable{
 		         agendaBean =(AgendaBean) elContext.getELResolver().getValue(elContext, null, "agendaBean");
 		    }
 		    
-		    this.contatos = agendaBean.getContatos();
-		    
-		    //TODO logica para excluir da lista contatos que nao se adequem a busca
+		    obtemContatosBusca(agendaBean);	
+		    	
+		    this.texto = "";
 		    
 		    return "busca.xhtml";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "failure";	
+			return "erroBusca.xhtml";	
 		} 
 		
+	}
+
+	private void obtemContatosBusca(AgendaBean agendaBean) {
+		List<ContatoBean> agendaBeanContatos  = agendaBean.getContatos();
+		
+		for(ContatoBean contato : agendaBeanContatos)
+		{
+			if(contato.getNome().contains(this.texto) && this.tipo.equals("nome"))
+			{
+				this.contatos.add(contato);
+			}
+			else if((contato.getLogradouro().contains(this.texto) || contato.getBairro().contains(this.texto)
+					|| contato.getCidade().contains(this.texto) || contato.getUf().contains(this.texto)) 
+					&& this.tipo.equals("endereco"))
+			{
+				this.contatos.add(contato);
+			}
+			else if(contato.getEmail().contains(this.texto) && this.tipo.equals("email"))
+			{
+				this.contatos.add(contato);
+			}
+			else if((contato.getTelefone().contains(this.texto) || contato.getCelular().contains(this.texto)
+					|| this.texto.contains(contato.getTelefone()) || this.texto.contains(contato.getCelular()) 
+					) && this.tipo.equals("telefone"))
+			{
+				this.contatos.add(contato);
+			}
+		}
 	}
 }

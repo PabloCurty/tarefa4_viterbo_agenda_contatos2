@@ -2,6 +2,7 @@ package beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,13 +16,14 @@ public class AgendaBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	List<ContatoBean> contatos = new ArrayList<ContatoBean>();
+	private List<ContatoBean> contatos = new ArrayList<ContatoBean>();
 	
-	//TODO remover
+	//TODO remover apos ter persistencia
 	@PostConstruct
     public void init(){
 		ContatoBean cont = new ContatoBean("Rodrigo Nunes", "1234-5678");
-		boolean so = contatos.add(cont);
+		//boolean so = contatos.add(cont);
+		contatos.add(cont);
     }
 
 	public List<ContatoBean> getContatos() {
@@ -36,26 +38,20 @@ public class AgendaBean implements Serializable{
 	{
 		ContatoBean contato = contatoBean;
 		contato.setAtivo(true);
-		contatos.add(contato);
-		return "index.xhtml";
-	}
-	/*
-	public String remove()
-	{
-		//Remover de uma lista sendo iterada dah merda
-		List<ContatoBean> contatos_ = new ArrayList<ContatoBean>();
-		contatos_ =	this.getContatos();
-		for(ContatoBean contato : contatos_)
+		//TODO
+		//No caso de recarregar a tela, esta adicionando de novo
+		//O que esta abaixo nao resolve
+		if(!contatos.contains(contatoBean))
 		{
-			if (!contato.isAtivo())
-			{
-				contatos_.remove(contato);
-			}
+			contatos.add(contato);
+			Collections.sort(contatos, (a, b) -> a.compare(b));
 		}
-		this.setContatos(contatos_);
+		else
+		{
+			return "errorCadastro.xhtml";
+		}
 		return "index.xhtml";
 	}
-	*/
 	
 	public String remove()
 	{
@@ -70,5 +66,11 @@ public class AgendaBean implements Serializable{
 			}
 		}
 		return "index.xhtml";
+	}
+	
+	//TODO finish editaContato
+	public String editaContato(ContatoBean contato)
+	{
+		return "editaContato.xhtml";
 	}
 }

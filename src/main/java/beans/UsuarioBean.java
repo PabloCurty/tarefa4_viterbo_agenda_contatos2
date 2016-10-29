@@ -1,7 +1,5 @@
 package beans;
 
-import java.io.Serializable;
-
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -12,9 +10,7 @@ import exception.UsuarioExistenteException;
 
 @ManagedBean(name = "usuarioBean")
 @RequestScoped
-public class UsuarioBean implements Serializable{
-
-	private static final long serialVersionUID = 1L;
+public class UsuarioBean {
 	
 	private String nome;
 	private String email;
@@ -44,9 +40,6 @@ public class UsuarioBean implements Serializable{
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	
 	public String cadastraUsuario(){
