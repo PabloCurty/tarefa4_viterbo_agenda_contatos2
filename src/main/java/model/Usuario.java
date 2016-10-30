@@ -34,7 +34,7 @@ public class Usuario implements Serializable {
 	private String email;
 	
 	/*TODO ver como coloca username unique*/
-	@Column(name = "USERNAME", nullable = false)
+	@Column(name = "USERNAME", nullable = false, unique = true)
 	private String username;
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;

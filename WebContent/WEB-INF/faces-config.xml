@@ -29,7 +29,7 @@
     	<navigation-case>
     		<from-action>#{usuarioBean.cadastraUsuario()}</from-action>
     		<from-outcome>failure</from-outcome>
-    		<to-view-id>errorCadastro.xhtml</to-view-id>
+    		<to-view-id>erroCadastro.xhtml</to-view-id>
     	</navigation-case>
     </navigation-rule>
 	

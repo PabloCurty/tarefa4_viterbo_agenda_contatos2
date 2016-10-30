@@ -67,4 +67,14 @@ public class UsuarioBean {
 		} 
 		
 	}
+	
+	public String cleanUsuario(){
+		this.nome = null;
+		this.email = null;
+		this.password = null;
+		this.username = null;
+		//TODO verificar se eh necessario
+		//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("loginBean", loginBean);
+		return "cadastraUsuario.xhtml";
+	}
 }

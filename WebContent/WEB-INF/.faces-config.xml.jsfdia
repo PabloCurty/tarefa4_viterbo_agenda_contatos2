@@ -16,8 +16,6 @@
   SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:errorLogin.xhtml" PATH="errorLogin.xhtml"
   SHAPE="256,321,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:errorCadastro.xhtml"
-  PATH="errorCadastro.xhtml" SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:cadastraUsuario.xhtml"
   PATH="cadastraUsuario.xhtml" SHAPE="32,161,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:cadastraUsuario.xhtml:0" NAME="item"
@@ -27,10 +25,12 @@
     NAME="output" PATH="index.xhtml" TARGET="rules:index.xhtml"
     TITLE="#{usuarioBean.cadastraUsuario()}:success" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
-    ID="failure:#{usuarioBean.cadastraUsuario()}:errorCadastro.xhtml"
-    NAME="output1" PATH="errorCadastro.xhtml"
-    TARGET="rules:errorCadastro.xhtml"
+    ID="failure:#{usuarioBean.cadastraUsuario()}:erroCadastro.xhtml"
+    NAME="output1" PATH="erroCadastro.xhtml"
+    TARGET="rules:erroCadastro.xhtml"
     TITLE="#{usuarioBean.cadastraUsuario()}:failure" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:erroCadastro.xhtml" PATH="erroCadastro.xhtml"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
