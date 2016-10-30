@@ -1,1 +1,0 @@
-CREATE SCHEMA `agenda_contatos` ;

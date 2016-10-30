@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="agendaContatos" transaction-type="JTA"> <!-- transaction-type="JTA" transaction-type="RESOURCE_LOCAL"-->
+	<persistence-unit name="agendaContatos" transaction-type="RESOURCE_LOCAL"> 
 	
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		
-		<!-- não sei se é aqui a jndi do database configurado no jboss satandalone.xml 
-			ou na hibernate.connection.datasource--> 
+		<!-- aqui a jndi do database configurado no jboss satandalone.xml --> 
 		<jta-data-source>java:/MySqlDS</jta-data-source>
 		
 		<!-- mapeamento das entidades criadas -->
@@ -19,26 +16,10 @@
 			<property name="hibernate.show_sql" value="true"/>
 			<!-- para formatamos as querys -->
 			<property name="hibernate.formate_sql" value="true"/>
-
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-			<property name="javax.persistence.jdbc.url"      value="jdbc:mysql://127.0.0.1:3306/agenda_contatos"/>
-			
-			<!-- usuario e senha definidos xml de configuração do servidor de aplicação -->
-            <!--  <property name="javax.persistence.jdbc.user"     value="admin"/>	
-            <property name="javax.persistence.jdbc.password" value="admin"/> -->
-            
-            <!-- não sei se é aqui a jndi do database configurado no jboss satandalone.xml ou na jta-data-source  
-			<property name="hibernate.connection.datasource" value="java:/MySqlDS"/>	-->
-            
-        	<!-- metodo para criacao, atualizacao ou exclusao de tables-->
-        	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
-        	<property name="hibernate.cache.use_second_level_cache" value="true" />
-        	
-        	<!-- “hibernate.hbm2ddl.auto” com essa opção ativada, o Hibernate atualizará suas tabelas 
-        	quando necessário. Por exemplo, se a tabela não existir ela irá criar (“CREATE TABLE…”), 
-        	se você adicionou uma coluna (“ALTER TABLE…”). Para testes vou deixar ativo, mas não aconselho 
-        	a deixar essa opção ativada quando se trata de uma aplicação real. -->
+        	<!-- atualizará e cria as suas tabelas quando necessário -->
         	<property name="hibernate.hbm2ddl.auto" value="update" />  
+        	<!-- Dialeto do mysql -->
+        	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
         	
         	<!-- 
         	
