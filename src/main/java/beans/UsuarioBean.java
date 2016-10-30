@@ -45,8 +45,8 @@ public class UsuarioBean {
 	public String cadastraUsuario(){
 		LoginBean loginBean = null; 
 		try {
-			ControleCadastroUsuario ccu = new ControleCadastroUsuario();
-			String acao = ccu.cadastraUsuario(this);
+			ControleCadastroUsuario controleCadastroUsuario = new ControleCadastroUsuario();
+			String acao = controleCadastroUsuario.cadastraUsuario(this);
 			FacesContext fc = FacesContext.getCurrentInstance();
 			ELContext elContext;
 		    if(fc!=null){

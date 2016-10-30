@@ -13,9 +13,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "USUARIO", uniqueConstraints = @UniqueConstraint(columnNames = {"ID_USUARIO", "username"}))
 @SequenceGenerator(name = "SEQUENCIA_USUARIO", sequenceName = "SEQ_USUARIO", allocationSize = 1)
 public class Usuario implements Serializable {
 
@@ -26,16 +27,16 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQUENCIA_USUARIO")
 	@Column(name = "ID_USUARIO")
-	private long id_ususario;
-	@Column(name = "NOME_USUARIO", nullable = false)
+	private long id_usuario;
+	@Column(name = "NOME", nullable = false)
 	private String nome_usuario;
-	@Column(name = "EMAIL_USUARIO", nullable = false)
+	@Column(name = "EMAIL", nullable = false)
 	private String email;
 	
 	/*TODO ver como coloca username unique*/
-	@Column(name = "USERNAME_USUARIO", nullable = false)
+	@Column(name = "USERNAME", nullable = false)
 	private String username;
-	@Column(name = "PASSWORD_USUARIO", nullable = false)
+	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 
 	/**
@@ -82,7 +83,7 @@ public class Usuario implements Serializable {
 
 	public Usuario(long idUsusario, String nome, String email, String username, String password, Agenda agenda) {
 		super();
-		this.id_ususario = idUsusario;
+		this.id_usuario = idUsusario;
 		this.nome_usuario = nome;
 		this.email = email;
 		this.username = username;
@@ -104,17 +105,30 @@ public class Usuario implements Serializable {
 	}
 
 	/*------------- get and set ------------- */
-
-	public long getIdUsusario() {
-		return id_ususario;
-	}
-
-	public void setIdUsusario(long idUsusario) {
-		this.id_ususario = idUsusario;
-	}
+	
 
 	public String getUsername() {
 		return username;
+	}
+
+	public long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+	public String getNome_usuario() {
+		return nome_usuario;
+	}
+
+	public void setNome_usuario(String nome_usuario) {
+		this.nome_usuario = nome_usuario;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public void setUsername(String username) {
@@ -152,4 +166,5 @@ public class Usuario implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 }

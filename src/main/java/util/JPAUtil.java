@@ -31,7 +31,7 @@ public class JPAUtil {
 					public class Produto
 				 */
 				// passa string do pacote onde vai procurar as classes
-				emf = Persistence.createEntityManagerFactory("trabalho01");
+				emf = Persistence.createEntityManagerFactory("agendaContatos");
 			}
 			catch(Throwable e){	
 				e.printStackTrace();

@@ -3,11 +3,14 @@ package model;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,12 +29,20 @@ public class Agenda implements Serializable{
 	@Column(name = "USUARIO")
 	private Usuario usuario;
 	
-	Set<Contato> contatos;
+	@OneToMany(mappedBy="agenda", cascade={CascadeType.ALL})
+	@OrderBy
+	private Set<Contato> contatos;
+
+	public Agenda(long id, Usuario usuario, Set<Contato> contatos) {
+		super();
+		this.id = id;
+		this.usuario = usuario;
+		this.contatos = contatos;
+	}
 
 	public Agenda() {
 		super();
 	}
-	
 	
 	public long getId() {
 		return id;
@@ -41,12 +52,12 @@ public class Agenda implements Serializable{
 		this.id = id;
 	}
 
-	public Usuario getDono() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setDono(Usuario dono) {
-		this.usuario = dono;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Set<Contato> getContatos() {

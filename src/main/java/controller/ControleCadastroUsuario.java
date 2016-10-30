@@ -4,8 +4,11 @@ import beans.UsuarioBean;
 import exception.UsuarioExistenteException;
 import model.Agenda;
 import model.Usuario;
+import service.CadastraUsuarioService;
 
 public class ControleCadastroUsuario {
+	
+	CadastraUsuarioService cadastroUsuarioService = new CadastraUsuarioService();
 
 	public String cadastraUsuario(UsuarioBean cadastroUsuarioBean) throws UsuarioExistenteException{
 		
@@ -15,7 +18,9 @@ public class ControleCadastroUsuario {
 									   cadastroUsuarioBean.getUsername(), 
 									   cadastroUsuarioBean.getPassword(), 
 									   new Agenda());
-			//TODO chama o service que chama a persistencia
+			//cadastrando usuário no banco e setando id do usuario que o banco retorna
+			user.setId_usuario(cadastroUsuarioService.cadastraUsuario(user));
+			
 			return "success";
 		} catch (Exception e) {
 			throw new UsuarioExistenteException("Usuario já existe no banco");
