@@ -41,14 +41,13 @@ public class LoginBean implements Serializable {
 	}
 
 	public String login(){
-		ControleLogin controleLogin = new ControleLogin();
-		return controleLogin.login(usuario, password);
-		/*if (usuario.equals("pablo") && password.equals("123456")) {
-			return "success";
-		}else{
+		try {
+			ControleLogin controleLogin = new ControleLogin();
+			return controleLogin.login(usuario, password);
+		} catch (Exception e) {
 			return "failure";
-		}*/
-		//return "success";
+		}
+		
 	}
 
 	public String cleanLogin()
