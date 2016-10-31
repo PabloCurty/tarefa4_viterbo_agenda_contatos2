@@ -3,25 +3,28 @@ package service;
 import dao.FabricaDeDAOs;
 import dao.LoginDao;
 import exception.InfraestruturaException;
+import model.Usuario;
 import util.JPAUtil;
 
 public class LoginService {
 
 	private static LoginDao loginDao = FabricaDeDAOs.getDAO(LoginDao.class);
 	
-	public long autentica(String usuario, String password){
+	Usuario usuario = new Usuario();
+	
+	public Usuario autentica(String username){
 		
 		try
 		{	
 			//inicia a transção no JPA
 			JPAUtil.beginTransaction();
 			// chama método inclui do DAO
-			long numero = loginDao.pegaLogin(usuario, password);
+			usuario = loginDao.pegaLogin(username);
 
 			// commitar a transação
 			JPAUtil.commitTransaction();
 			
-			return numero;
+			return usuario;
 		} 
 		catch(InfraestruturaException e){	
 			try{	

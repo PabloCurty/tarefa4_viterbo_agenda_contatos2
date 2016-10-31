@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import exception.PasswordException;
 import exception.UsernameException;
+import model.Usuario;
 import service.LoginService;
 
 public class ControleLogin {
@@ -11,15 +12,17 @@ public class ControleLogin {
 	//@Inject
 	//LoginService loginService;
 	
-	public String login (String usuario, String password){
+	Usuario usuario = new Usuario();
+	
+	public String login (String username, String password){
 		try {
-			//LoginService loginService = new LoginService();
-			//long numero = loginService.autentica(usuario, password);
-			//if(numero == 1){
+			LoginService loginService = new LoginService();
+			usuario = loginService.autentica(username);
+			if(usuario.getPassword().equals(password)){
 				return "success";
-			//}else{
-			//	return "failure";
-			//}
+			}else{
+				return "failure";
+			}
 			
 		} catch (UsernameException e) {
 			throw new UsernameException("usuario errado");
