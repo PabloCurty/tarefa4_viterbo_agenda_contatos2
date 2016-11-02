@@ -60,6 +60,8 @@ public class Contato implements Serializable{
 	private String ddi;
 	@Column(name = "DDD")
 	private String ddd;
+	
+	private boolean editavel = true;
 
 	
 	
@@ -102,6 +104,14 @@ public class Contato implements Serializable{
 		this.ddd = ddd;
 	}
 	
+	public boolean isEditavel() {
+		return editavel;
+	}
+
+	public void setEditavel(boolean editavel) {
+		this.editavel = editavel;
+	}
+
 	public Contato() {
 		super();
 	}

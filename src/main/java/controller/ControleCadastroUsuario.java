@@ -19,8 +19,8 @@ public class ControleCadastroUsuario {
 									   cadastroUsuarioBean.getPassword(), 
 									   new Agenda());
 			//cadastrando usuário no banco e setando id do usuario que o banco retorna
-			user.setId_usuario(cadastroUsuarioService.cadastraUsuario(user));
-			
+			Usuario usuario = cadastroUsuarioService.cadastraUsuario(user);
+			cadastroUsuarioBean.setId(usuario.getId_usuario());
 			return "success";
 		} catch (Exception e) {
 			throw new UsuarioExistenteException("Usuario já existe no banco");

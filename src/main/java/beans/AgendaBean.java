@@ -2,12 +2,19 @@ package beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+import controller.ControleAgenda;
+import controller.ControlrCadastraContato;
+
 import javax.annotation.PostConstruct;
+import javax.enterprise.inject.spi.Bean;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "agendaBean")
@@ -18,12 +25,21 @@ public class AgendaBean implements Serializable{
 	
 	private List<ContatoBean> contatos = new ArrayList<ContatoBean>();
 	
+	long id;
+	
 	//TODO remover apos ter persistencia
 	@PostConstruct
     public void init(){
-		ContatoBean cont = new ContatoBean("Rodrigo Nunes", "1234-5678");
-		//boolean so = contatos.add(cont);
-		contatos.add(cont);
+		
+		id = (long) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("id");
+		
+		ControleAgenda controleContatos = new ControleAgenda();
+
+		List<ContatoBean> conts =  (List<ContatoBean>) controleContatos.pegaAgenda(id);
+		
+		contatos.removeAll(conts);
+		contatos.addAll(conts);
+		
     }
 
 	public List<ContatoBean> getContatos() {
@@ -34,22 +50,18 @@ public class AgendaBean implements Serializable{
 		this.contatos = contatos;
 	}
 	
+
 	public String cadastra(ContatoBean contatoBean)
 	{
-		ContatoBean contato = contatoBean;
-		//TODO
-		//No caso de recarregar a tela, esta adicionando de novo
-		//O que esta abaixo nao resolve
-		if(!contatos.contains(contatoBean))
-		{
-			contatos.add(contato);
-			Collections.sort(contatos, (a, b) -> a.compare(b));
+		ControlrCadastraContato controleCadastraContato = new ControlrCadastraContato();
+		String string = controleCadastraContato.cadastraContato(contatoBean, id);
+
+		if(string.equals("success")){
+			return "index.xhtml";
+		}else{
+			return "erroCadastro.xhtml";
 		}
-		else
-		{
-			return "errorCadastro.xhtml";
-		}
-		return "index.xhtml";
+		
 	}
 	
 	public String saveAction() {

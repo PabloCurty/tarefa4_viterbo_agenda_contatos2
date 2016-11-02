@@ -3,24 +3,23 @@ package service;
 import dao.CadastroDao;
 import dao.FabricaDeDAOs;
 import exception.InfraestruturaException;
-import model.Usuario;
+import model.Contato;
 import util.JPAUtil;
 
-public class CadastraUsuarioService {
-
+public class ContatoService {
+	
 	private static CadastroDao cadastroDao = FabricaDeDAOs.getDAO(CadastroDao.class);
 
-	public Usuario cadastraUsuario(Usuario usuario) {
-
+	public Contato cadastraContato(Contato contato) {
 		try {
 			// inicia a transção no JPA
 			JPAUtil.beginTransaction();
 			// chama método inclui do DAO
-			Usuario user = cadastroDao.cadastraUsuario(usuario);
+			Contato cont = cadastroDao.cadastraContato(contato);
 			// commitar a transação
 			JPAUtil.commitTransaction();
 
-			return user;
+			return cont;
 		} catch (InfraestruturaException e) {
 			try {
 				// se der erro na transação volto
@@ -38,6 +37,5 @@ public class CadastraUsuarioService {
 			JPAUtil.closeEntityManager();
 		}
 	}
-
 
 }

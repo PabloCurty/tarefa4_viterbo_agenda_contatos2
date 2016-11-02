@@ -33,11 +33,17 @@ public class Agenda implements Serializable{
 	@OrderBy
 	private Set<Contato> contatos;
 
-	public Agenda(long id, Usuario usuario, Set<Contato> contatos) {
+	public Agenda(long id, Usuario id_usuario, Set<Contato> contatos) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
 		this.contatos = contatos;
+	}
+	
+	public Agenda(long id, Usuario usuario) {
+		super();
+		this.id = id;
+		this.usuario = usuario;
 	}
 
 	public Agenda() {

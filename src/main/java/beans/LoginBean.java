@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import controller.ControleLogin;
+import model.Usuario;
 
 /**
  TODO apos insert de contato, login nao aparece mais em index
@@ -17,6 +19,7 @@ public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String usuario;
 	private String password;
+	private Long id;
 	
 	private final String message = "Entre com usuário e senha para acessar seus contatos";
 	
@@ -40,10 +43,20 @@ public class LoginBean implements Serializable {
 		this.usuario = usuario;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String login(){
 		try {
 			ControleLogin controleLogin = new ControleLogin();
-			return controleLogin.login(usuario, password);
+			String str = controleLogin.login(this);
+			FacesContext.getCurrentInstance().getExternalContext().getFlash().put("id", getId());
+			return str;
 		} catch (Exception e) {
 			return "failure";
 		}
@@ -54,6 +67,7 @@ public class LoginBean implements Serializable {
 	{
 		this.password = null;
 		this.usuario = null;
+		this.id = null;
 		//TODO verificar se eh necessario
 		//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("loginBean", loginBean);
 		return "login.xhtml";

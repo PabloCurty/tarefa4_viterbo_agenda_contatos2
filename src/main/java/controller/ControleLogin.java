@@ -1,7 +1,6 @@
 package controller;
 
-import javax.inject.Inject;
-
+import beans.LoginBean;
 import exception.PasswordException;
 import exception.UsernameException;
 import model.Usuario;
@@ -9,16 +8,14 @@ import service.LoginService;
 
 public class ControleLogin {
 	
-	//@Inject
-	//LoginService loginService;
-	
 	Usuario usuario = new Usuario();
 	
-	public String login (String username, String password){
+	public String login (LoginBean loginBean){
 		try {
 			LoginService loginService = new LoginService();
-			usuario = loginService.autentica(username);
-			if(usuario.getPassword().equals(password)){
+			usuario = loginService.autentica(loginBean.getUsuario());
+			if(usuario.getPassword().equals(loginBean.getPassword())){
+				loginBean.setId(usuario.getId_usuario());
 				return "success";
 			}else{
 				return "failure";
