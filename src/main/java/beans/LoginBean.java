@@ -7,7 +7,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import controller.ControleLogin;
-import model.Usuario;
 
 /**
  TODO apos insert de contato, login nao aparece mais em index

@@ -8,12 +8,12 @@ import service.AgendaService;
 
 public class ControleAgenda {
 
-	public Collection<? extends Contato> pegaAgenda(long id){
+	public Collection<? extends Contato> getContatosDaAgenda(long id){
 		
 		AgendaService agendaService = new AgendaService();
 		Agenda agenda = agendaService.getAgenda(id);
-		Collection<? extends Contato> contatosBean = agendaService.getContatosDaAgenda(agenda);
-		return contatosBean;
+		Collection<? extends Contato> contatos = agendaService.getContatosDaAgenda(agenda);
+		return contatos;
 		
 	}
 

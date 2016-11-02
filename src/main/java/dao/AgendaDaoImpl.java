@@ -1,7 +1,6 @@
 package dao;
 
 import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -35,8 +34,8 @@ public class AgendaDaoImpl implements AgendaDao {
 			Query query = em.createQuery("select a from Agenda as a where a.id = :id");
 			query.setParameter("id", id);
 			@SuppressWarnings("unchecked")
-			List<Agenda> agendas = query.getResultList();
-			return agendas.get(0);
+			Agenda agenda = (Agenda) query.getSingleResult();
+			return agenda;
 		} catch (RuntimeException e) {
 			// propaga exceção de infraestrutura
 			throw new InfraestruturaException(e);

@@ -2,7 +2,6 @@ package service;
 
 import java.util.Collection;
 
-import beans.ContatoBean;
 import dao.AgendaDao;
 import dao.FabricaDeDAOs;
 import exception.InfraestruturaException;

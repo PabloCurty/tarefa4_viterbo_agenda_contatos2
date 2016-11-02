@@ -34,7 +34,7 @@ public class AgendaBean implements Serializable{
 		ControleAgenda controleContatos = new ControleAgenda();
 
 		@SuppressWarnings("unchecked")
-		List<Contato> contatosModel =  (List<Contato>) controleContatos.pegaAgenda(id);
+		List<Contato> contatosModel =  (List<Contato>) controleContatos.getContatosDaAgenda(id);
 		
 		List<ContatoBean> contatosBean = processarContatos(contatosModel);
 		
@@ -51,7 +51,9 @@ public class AgendaBean implements Serializable{
 		List<ContatoBean> contatosBean = new ArrayList<ContatoBean>();
 		for(Contato contato : contatosModel)
 		{
-			ContatoBean contatoBean = new ContatoBean(id, contato.getNome(), 
+			ContatoBean contatoBean = new ContatoBean(
+					  contato.getId(), 
+					  contato.getNome(), 
 					  contato.getEmail(), 
 					  contato.getLogradouro(), 
 					  contato.getComplemento(), 
@@ -82,7 +84,7 @@ public class AgendaBean implements Serializable{
 	public String cadastra(ContatoBean contatoBean)
 	{
 		ControleContato controleContato = new ControleContato();
-		String string = controleContato.cadastraContato(contatoBean, id);
+		String string = controleContato.cadastraContato(contatoBean, this.id);
 
 		if(string.equals("success")){
 			contatos.add(contatoBean);
@@ -98,7 +100,7 @@ public class AgendaBean implements Serializable{
 		ControleContato controleContato = new ControleContato();
 		
 		//get all existing value but set "editable" to false
-		for (ContatoBean contato : contatos){
+		for (ContatoBean contato : this.contatos){
 			
 			//se editavel, eh pq precisa ser atualizado
 			if(contato.isEditavel())
@@ -126,6 +128,9 @@ public class AgendaBean implements Serializable{
 	}
 	
 	public String removeAction(ContatoBean contato) {
+		
+		ControleContato controleContato = new ControleContato();
+		
 		Iterator<ContatoBean> iter = this.contatos.iterator();
 		
 		while (iter.hasNext()) {
@@ -133,7 +138,14 @@ public class AgendaBean implements Serializable{
 	
 		    if (contato_.equals(contato))
 			{
-		    	iter.remove();
+		    	try{
+			    	controleContato.removeContato(contato);
+			    	iter.remove();
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.out.println("Reinicializar operação");
+		    	}
 			}
 		}
 		return null;
