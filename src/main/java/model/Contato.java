@@ -61,30 +61,7 @@ public class Contato implements Serializable{
 	@Column(name = "DDD")
 	private String ddd;
 	
-	private boolean editavel = true;
-
-	
-	
-	public Contato(Long id, String nome, String email, Agenda agenda, String logradouro, String complemento,
-			String bairro, String cidade, String uf, String cep, String telefone, String celular, String operadora,
-			String ddi, String ddd) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.agenda = agenda;
-		this.logradouro = logradouro;
-		this.complemento = complemento;
-		this.bairro = bairro;
-		this.cidade = cidade;
-		this.uf = uf;
-		this.cep = cep;
-		this.telefone = telefone;
-		this.celular = celular;
-		this.operadora = operadora;
-		this.ddi = ddi;
-		this.ddd = ddd;
-	}
+	private boolean editavel = false;
 
 	public Contato(String nome, String email, String logradouro, String complemento, String bairro, String cidade,
 			String uf, String cep, String telefone, String celular, String operadora, String ddi, String ddd) {
@@ -102,6 +79,27 @@ public class Contato implements Serializable{
 		this.operadora = operadora;
 		this.ddi = ddi;
 		this.ddd = ddd;
+	}
+	
+
+	public Contato(Long id, String nome, String email, String logradouro, String complemento, String bairro, String cidade,
+			String uf, String cep, String telefone, String celular, String operadora, String ddi, String ddd, Agenda agenda) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.logradouro = logradouro;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.uf = uf;
+		this.cep = cep;
+		this.telefone = telefone;
+		this.celular = celular;
+		this.operadora = operadora;
+		this.ddi = ddi;
+		this.ddd = ddd;
+		this.agenda = agenda;
 	}
 	
 	public boolean isEditavel() {

@@ -36,5 +36,30 @@ public class CadastroDaoImpl implements CadastroDao {
 		}
 	}
 
+	@Override
+	public void removeContato(Contato umContato) {
+		try {
+			EntityManager em = JPAUtil.getEntityManager();
+			
+			em.remove(umContato);
 
+		} catch (RuntimeException e) {
+			// propaga exceção de infraestrutura
+			throw new InfraestruturaException(e);
+		}
+	}
+
+	@Override
+	public Contato updateContato(Contato contato) {
+		try {
+			EntityManager em = JPAUtil.getEntityManager();
+			
+			em.merge(contato);
+			
+			return contato;
+		} catch (RuntimeException e) {
+			// propaga exceção de infraestrutura
+			throw new InfraestruturaException(e);
+		}
+	}
 }

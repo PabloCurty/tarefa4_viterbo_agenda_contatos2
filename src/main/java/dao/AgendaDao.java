@@ -2,12 +2,12 @@ package dao;
 
 import java.util.Collection;
 
-import beans.ContatoBean;
 import model.Agenda;
+import model.Contato;
 
 public interface AgendaDao {
 	
-	public Collection<? extends ContatoBean> pegaContatosDaAgenda(Agenda agenda);
+	public Collection<? extends Contato> pegaContatosDaAgenda(Agenda agenda);
 
 	public Agenda pegaAgenda(long id);
 

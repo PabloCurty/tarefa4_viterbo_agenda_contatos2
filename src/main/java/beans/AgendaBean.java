@@ -2,8 +2,6 @@ package beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,10 +9,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import controller.ControleAgenda;
-import controller.ControlrCadastraContato;
+import controller.ControleContato;
+import model.Contato;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.spi.Bean;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "agendaBean")
@@ -35,12 +33,42 @@ public class AgendaBean implements Serializable{
 		
 		ControleAgenda controleContatos = new ControleAgenda();
 
-		List<ContatoBean> conts =  (List<ContatoBean>) controleContatos.pegaAgenda(id);
+		@SuppressWarnings("unchecked")
+		List<Contato> contatosModel =  (List<Contato>) controleContatos.pegaAgenda(id);
 		
-		contatos.removeAll(conts);
-		contatos.addAll(conts);
+		List<ContatoBean> contatosBean = processarContatos(contatosModel);
+		
+		if(!contatos.isEmpty())
+		{
+			contatos.clear();
+		}
+		contatos.addAll(contatosBean);
 		
     }
+	
+	private List<ContatoBean> processarContatos(List<Contato> contatosModel)
+	{
+		List<ContatoBean> contatosBean = new ArrayList<ContatoBean>();
+		for(Contato contato : contatosModel)
+		{
+			ContatoBean contatoBean = new ContatoBean(id, contato.getNome(), 
+					  contato.getEmail(), 
+					  contato.getLogradouro(), 
+					  contato.getComplemento(), 
+					  contato.getBairro(), 
+					  contato.getCidade(), 
+					  contato.getUf(), 
+					  contato.getCep(), 
+					  contato.getTelefone(), 
+					  contato.getCelular(), 
+					  contato.getOperadora(), 
+					  contato.getDdi(), 
+					  contato.getDdd(),
+					  contato.getAgenda());
+			contatosBean.add(contatoBean);
+		}
+		return contatosBean;
+	}
 
 	public List<ContatoBean> getContatos() {
 		return this.contatos;
@@ -53,10 +81,11 @@ public class AgendaBean implements Serializable{
 
 	public String cadastra(ContatoBean contatoBean)
 	{
-		ControlrCadastraContato controleCadastraContato = new ControlrCadastraContato();
-		String string = controleCadastraContato.cadastraContato(contatoBean, id);
+		ControleContato controleContato = new ControleContato();
+		String string = controleContato.cadastraContato(contatoBean, id);
 
 		if(string.equals("success")){
+			contatos.add(contatoBean);
 			return "index.xhtml";
 		}else{
 			return "erroCadastro.xhtml";
@@ -64,11 +93,27 @@ public class AgendaBean implements Serializable{
 		
 	}
 	
-	public String saveAction() {
+	public String updateAction() {
 
+		ControleContato controleContato = new ControleContato();
+		
 		//get all existing value but set "editable" to false
 		for (ContatoBean contato : contatos){
-			contato.setEditavel(false);
+			
+			//se editavel, eh pq precisa ser atualizado
+			if(contato.isEditavel())
+			{
+				//chamar update
+				try
+				{
+					controleContato.updateContato(contato);
+					contato.setEditavel(false);
+				}
+				catch (Exception e)
+				{
+					System.out.println("Reinicializar operação");
+				}
+			}
 		}
 		//return to current page
 		return null;

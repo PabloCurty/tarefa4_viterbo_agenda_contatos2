@@ -36,6 +36,7 @@ public class Agenda implements Serializable{
 	public Agenda(long id, Usuario id_usuario, Set<Contato> contatos) {
 		super();
 		this.id = id;
+		//TODO fix no banco
 		this.usuario = usuario;
 		this.contatos = contatos;
 	}

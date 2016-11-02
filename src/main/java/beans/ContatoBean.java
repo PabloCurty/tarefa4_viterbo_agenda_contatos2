@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
+import model.Agenda;
+
 //ViewScope
 //As soon as the user navigates to a different page, the bean goes out of scope.
 
@@ -33,13 +35,15 @@ public class ContatoBean implements Serializable{
 	private String ddi;
 	private String ddd;
 	
+	private Agenda agenda;
+	
 	/* CONTROLE */
 	//controla se deve ser editavel na tela
 	boolean editavel;
 
 	public ContatoBean(Long id, String nome, String email, String logradouro, String complemento, String bairro,
 			String cidade, String uf, String cep, String telefone, String celular, String operadora, String ddi,
-			String ddd) {
+			String ddd, Agenda agenda) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -55,6 +59,7 @@ public class ContatoBean implements Serializable{
 		this.operadora = operadora;
 		this.ddi = ddi;
 		this.ddd = ddd;
+		this.setAgenda(agenda);
 		this.editavel = false;
 	}
 
@@ -193,6 +198,14 @@ public class ContatoBean implements Serializable{
 		String s1 = this.getNome();
         String s2 = o2.getNome();
         return s1.toLowerCase().compareTo(s2.toLowerCase());
-	}    
+	}
+
+	public Agenda getAgenda() {
+		return agenda;
+	}
+
+	public void setAgenda(Agenda agenda) {
+		this.agenda = agenda;
+	} 
 	
 }

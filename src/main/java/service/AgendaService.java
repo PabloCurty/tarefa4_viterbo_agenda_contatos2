@@ -7,25 +7,26 @@ import dao.AgendaDao;
 import dao.FabricaDeDAOs;
 import exception.InfraestruturaException;
 import model.Agenda;
+import model.Contato;
 import util.JPAUtil;
 
 public class AgendaService {
 
 	private static AgendaDao agendaDao = FabricaDeDAOs.getDAO(AgendaDao.class);
 	
-	public Collection<? extends ContatoBean> getContatosDaAgenda(Agenda agenda) {
+	public Collection<? extends Contato> getContatosDaAgenda(Agenda agenda) {
 		try
 		{	
-			Collection<? extends ContatoBean> contatosBean;
+			Collection<? extends Contato> contatos;
 			//inicia a transção no JPA
 			JPAUtil.beginTransaction();
 			// chama método inclui do DAO
-			contatosBean = agendaDao.pegaContatosDaAgenda(agenda);
+			contatos = agendaDao.pegaContatosDaAgenda(agenda);
 
 			// commitar a transação
 			JPAUtil.commitTransaction();
 			
-			return contatosBean;
+			return contatos;
 		} 
 		catch(InfraestruturaException e){	
 			try{	
