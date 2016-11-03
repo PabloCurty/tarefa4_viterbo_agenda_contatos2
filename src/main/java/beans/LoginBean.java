@@ -62,13 +62,13 @@ public class LoginBean implements Serializable {
 		
 	}
 
-	public String cleanLogin()
+	public String logout()
 	{
 		this.password = null;
 		this.usuario = null;
 		this.id = null;
 		//TODO verificar se eh necessario
-		//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("loginBean", loginBean);
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "login.xhtml";
 	}
 	

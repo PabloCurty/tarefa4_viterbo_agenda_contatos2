@@ -17,20 +17,24 @@
 	<h:form>
 		Bem vindo : <h:outputText value="#{loginBean.usuario}" />
 		<h:outputText value=" " />
-		<h:commandButton value="Logout" action="#{loginBean.cleanLogin()}" />
+		<h:commandButton value="Logout" action="#{loginBean.logout()}" />
 	</h:form>
 
+	<h:outputText value="&lt;br/&gt;" escape="false" />
+
 	<h:form>
-		<h:inputText value="#{buscaBean.texto}"/>
 		Tipo de busca: <h:selectOneRadio value="#{buscaBean.tipo}">
 			<f:selectItem itemValue="nome" itemLabel="Nome" />
 			<f:selectItem itemValue="endereco" itemLabel="Endereco" />
 			<f:selectItem itemValue="email" itemLabel="Email"/>
 			<f:selectItem itemValue="telefone" itemLabel="Telefone"/>
 		</h:selectOneRadio>
+		<h:inputText value="#{buscaBean.texto}"/>
+		<h:outputText value=" " />
 		<h:commandButton value="Buscar" action="#{buscaBean.busca()}" />
 	</h:form>
 
+	<h1>Resultado da busca</h1>
 	<h:form>
 		<h:dataTable value="#{buscaBean.contatos}" var="contato"
 			styleClass="order-table"
@@ -45,21 +49,102 @@
 			</h:column>
 			
 			<h:column>
+				<f:facet name="header">Email</f:facet>
+				<!-- #{contato.nome}-->
+				<h:inputText value="#{contato.email}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.email}" rendered="#{not contato.editavel}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Logradouro</f:facet>
+				<!-- #{contato.nome}-->
+				<h:inputText value="#{contato.logradouro}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.logradouro}" rendered="#{not contato.editavel}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Complemento</f:facet>
+				<!-- #{contato.nome}-->
+				<h:inputText value="#{contato.complemento}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.complemento}" rendered="#{not contato.editavel}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Bairro</f:facet>
+				<!-- #{contato.nome}-->
+				<h:inputText value="#{contato.bairro}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.bairro}" rendered="#{not contato.editavel}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Cidade</f:facet>
+				<!-- #{contato.nome}-->
+				<h:inputText value="#{contato.cidade}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.cidade}" rendered="#{not contato.editavel}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">UF</f:facet>
+				<!-- #{contato.nome}-->
+				<h:inputText value="#{contato.uf}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.uf}" rendered="#{not contato.editavel}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">CEP</f:facet>
+				<!-- #{contato.nome}-->
+				<h:inputText value="#{contato.cep}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.cep}" rendered="#{not contato.editavel}" />
+			</h:column>
+			
+			<h:column>
 				<f:facet name="header">Telefone</f:facet>
 				<!-- #{contato.telefone}-->
 				<h:inputText value="#{contato.telefone}" size="10" rendered="#{contato.editavel}" />
 				<h:outputText value="#{contato.telefone}" rendered="#{not contato.editavel}" />
 			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Operadora</f:facet>
+				<!-- #{contato.telefone}-->
+				<h:inputText value="#{contato.operadora}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.operadora}" rendered="#{not contato.editavel}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">DDI</f:facet>
+				<!-- #{contato.telefone}-->
+				<h:inputText value="#{contato.ddi}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.ddi}" rendered="#{not contato.editavel}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">DDD</f:facet>
+				<!-- #{contato.telefone}-->
+				<h:inputText value="#{contato.ddd}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.ddd}" rendered="#{not contato.editavel}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Celular</f:facet>
+				<!-- #{contato.telefone}-->
+				<h:inputText value="#{contato.celular}" size="10" rendered="#{contato.editavel}" />
+				<h:outputText value="#{contato.celular}" rendered="#{not contato.editavel}" />
+			</h:column>
+			
 			<h:column>
     		<f:facet name="header">Ação</f:facet>
 				<h:commandLink value="Editar" action="#{agendaBean.editAction(contato)}"
                                        rendered="#{not contato.editavel}" />
+                <h:outputText value=" " />                       
                 <h:commandLink value="Remover" action="#{agendaBean.removeAction(contato)}"
                                        rendered="#{not contato.editavel}" />
 			</h:column>
 			
 		</h:dataTable>
-		<h:commandButton value="Salvar mudancas" action="#{buscaBean.saveAction}" />
+		<h:outputText value="&lt;br/&gt;" escape="false" />
+		<h:commandButton value="Salvar mudancas" action="#{buscaBean.updateAction}" />
+		<h:outputText value=" " />
 		<h:commandButton value="Retornar à agenda" action="index.xhtml" />
 	</h:form>
 

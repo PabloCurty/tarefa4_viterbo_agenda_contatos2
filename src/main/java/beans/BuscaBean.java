@@ -9,6 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import controller.ControleContato;
+
 @ManagedBean(name = "buscaBean")
 @SessionScoped
 public class BuscaBean implements Serializable{
@@ -63,6 +65,11 @@ public class BuscaBean implements Serializable{
 		         agendaBean =(AgendaBean) elContext.getELResolver().getValue(elContext, null, "agendaBean");
 		    }
 		    
+		    if(this.tipo == null)
+		    {
+		    	this.tipo = "nome";
+		    }
+		    
 		    obtemContatosBusca(agendaBean);	
 		    	
 		    this.texto = "";
@@ -80,39 +87,63 @@ public class BuscaBean implements Serializable{
 		
 		for(ContatoBean contato : agendaBeanContatos)
 		{
-			if(contato.getNome().contains(this.texto) && this.tipo.equals("nome"))
+			if(tipo.equals("nome"))
 			{
-				this.contatos.add(contato);
+				if(contato.getNome().contains(this.texto) || this.texto.contains(contato.getNome()))
+				{
+					this.contatos.add(contato);
+				}
 			}
-			else if((contato.getLogradouro().contains(this.texto) || contato.getBairro().contains(this.texto)
-					|| contato.getCidade().contains(this.texto) || contato.getUf().contains(this.texto)) 
-					&& this.tipo.equals("endereco"))
+			else
+			if(tipo.equals("endereco"))
 			{
-				this.contatos.add(contato);
+				if(contato.getLogradouro().contains(this.texto) || this.texto.contains(contato.getLogradouro()))
+				{
+					this.contatos.add(contato);
+				}
 			}
-			else if(contato.getEmail().contains(this.texto) && this.tipo.equals("email"))
+			else
+			if(tipo.equals("email"))
 			{
-				this.contatos.add(contato);
+				if(contato.getEmail().contains(this.texto) || this.texto.contains(contato.getEmail()))
+				{
+					this.contatos.add(contato);
+				}
 			}
-			else if((contato.getTelefone().contains(this.texto) || contato.getCelular().contains(this.texto)
-					|| this.texto.contains(contato.getTelefone()) || this.texto.contains(contato.getCelular()) 
-					) && this.tipo.equals("telefone"))
+			else
+			if(tipo.equals("telefone"))
 			{
-				this.contatos.add(contato);
+				if(contato.getTelefone().contains(this.texto) || contato.getCelular().contains(this.texto)
+						|| this.texto.contains(contato.getTelefone()) || this.texto.contains(contato.getCelular()))
+				{
+					this.contatos.add(contato);
+				}
 			}
 		}
 	}
 	
-	public String saveAction() {
-
+	public String updateAction() {
+		
+		ControleContato controleContato = new ControleContato();
+		
 		//get all existing value but set "editable" to false
-		for (ContatoBean contato : contatos){
-			contato.setEditavel(false);
+		for (ContatoBean contato : this.contatos){
+			
+			//se editavel, eh pq precisa ser atualizado
+			if(contato.isEditavel())
+			{
+				//chamar update
+				try
+				{
+					controleContato.updateContato(contato);
+					contato.setEditavel(false);
+				}
+				catch (Exception e)
+				{
+					System.out.println("Reinicializar operação");
+				}
+			}
 		}
-		
-		//TODO todos os contatos que eu editar no busca tem que se refletir em agendaBean
-		//Caso a ideia do pablo de sempre buscar da base seja seguida, isso nao sera problema
-		
 		//return to current page
 		return null;
 

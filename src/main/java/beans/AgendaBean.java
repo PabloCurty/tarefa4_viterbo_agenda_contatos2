@@ -25,7 +25,6 @@ public class AgendaBean implements Serializable{
 	
 	long id;
 	
-	//TODO remover apos ter persistencia
 	@PostConstruct
     public void init(){
 		

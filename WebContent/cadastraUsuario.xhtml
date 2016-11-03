@@ -21,8 +21,12 @@
 			<h:inputText value="#{usuarioBean.username}"/>
 			<h:outputText value="password" />
 			<h:inputSecret value="#{usuarioBean.password}" />
+			<h:outputText value="&lt;br/&gt;" escape="false" />
 			<h:commandButton value="Submit" type="submit" action="#{usuarioBean.cadastraUsuario()}" />
+			<h:outputText value="&lt;br/&gt;" escape="false" />
+			<h:commandButton action="login" value="Retorne para login" />
 		</h:panelGrid>
 	</h:form>
+	
 </body>
 </html>
