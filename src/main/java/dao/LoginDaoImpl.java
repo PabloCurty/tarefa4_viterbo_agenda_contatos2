@@ -17,6 +17,7 @@ public class LoginDaoImpl implements LoginDao{
 			EntityManager em = JPAUtil.getEntityManager();
 			Query query = em.createQuery("select u from Usuario as u where u.username = :username");
 			query.setParameter("username", username);
+			@SuppressWarnings("unchecked")
 			List<Usuario> usuarios = query.getResultList();
 			Usuario user = new Usuario();
 			for (Usuario usuario : usuarios) {

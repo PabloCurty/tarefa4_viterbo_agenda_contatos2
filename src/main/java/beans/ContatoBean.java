@@ -59,7 +59,7 @@ public class ContatoBean implements Serializable{
 		this.operadora = operadora;
 		this.ddi = ddi;
 		this.ddd = ddd;
-		this.setAgenda(agenda);
+		this.agenda = agenda;
 		this.editavel = false;
 	}
 

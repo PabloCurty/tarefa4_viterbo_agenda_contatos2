@@ -31,10 +31,10 @@ public class AgendaBean implements Serializable{
 		
 		id = (long) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("id");
 		
-		ControleAgenda controleContatos = new ControleAgenda();
+		ControleAgenda controleAgenda = new ControleAgenda();
 
 		@SuppressWarnings("unchecked")
-		List<Contato> contatosModel =  (List<Contato>) controleContatos.getContatosDaAgenda(id);
+		List<Contato> contatosModel =  (List<Contato>) controleAgenda.getContatosDaAgenda(id);
 		
 		List<ContatoBean> contatosBean = processarContatos(contatosModel);
 		

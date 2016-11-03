@@ -33,7 +33,6 @@ public class AgendaDaoImpl implements AgendaDao {
 			EntityManager em = JPAUtil.getEntityManager();
 			Query query = em.createQuery("select a from Agenda as a where a.id = :id");
 			query.setParameter("id", id);
-			@SuppressWarnings("unchecked")
 			Agenda agenda = (Agenda) query.getSingleResult();
 			return agenda;
 		} catch (RuntimeException e) {

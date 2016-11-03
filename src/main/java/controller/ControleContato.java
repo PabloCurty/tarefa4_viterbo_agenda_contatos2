@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import beans.ContatoBean;
 import exception.UsuarioExistenteException;
 import model.Agenda;
@@ -56,12 +58,30 @@ public class ControleContato {
 					  contatoBean.getDdi(), 
 					  contatoBean.getDdd(),
 					  contatoBean.getAgenda());
+			//Contato contato = getContato(contatoBean);
+			
 			ContatoService contatoService = new ContatoService();
 			contatoService.removeContato(contato);
 			return "success";
 		} catch (Exception e) {
 			throw new UsuarioExistenteException("Erro ao remover");
 		}
+	}
+	
+	private Contato getContato(ContatoBean contatoBean) 
+	{
+		ControleAgenda controleAgenda = new ControleAgenda();
+		@SuppressWarnings("unchecked")
+		List<Contato> contatosModel =  (List<Contato>) controleAgenda.getContatosDaAgenda(contatoBean.getAgenda().getId());
+		
+		for(Contato contato : contatosModel)
+		{
+			if(contato.getId().equals(contatoBean.getId()))
+			{
+				return contato;
+			}
+		}
+		return null;
 	}
 	
 	public String updateContato(ContatoBean contatoBean)
