@@ -5,7 +5,6 @@ import javax.persistence.Query;
 import javax.persistence.TransactionRequiredException;
 
 import exception.InfraestruturaException;
-import model.Agenda;
 import model.Contato;
 import model.Usuario;
 import util.JPAUtil;
@@ -51,6 +50,9 @@ public class CadastroDaoImpl implements CadastroDao {
 			
 			
 			em.remove(contato_);
+
+			//NAO FUNCIONA 
+//			em.remove(contato);
 
 		} catch (IllegalArgumentException e) {
 			// propaga exceção de infraestrutura

@@ -65,10 +65,10 @@ public class BuscaBean implements Serializable{
 		         agendaBean =(AgendaBean) elContext.getELResolver().getValue(elContext, null, "agendaBean");
 		    }
 		    
-		    if(this.tipo == null)
-		    {
-		    	this.tipo = "nome";
-		    }
+//		    if(this.tipo == null)
+//		    {
+//		    	this.tipo = "nome";
+//		    }
 		    
 		    obtemContatosBusca(agendaBean);	
 		    	
@@ -89,7 +89,7 @@ public class BuscaBean implements Serializable{
 		{
 			if(tipo.equals("nome"))
 			{
-				if(contato.getNome().contains(this.texto) || this.texto.contains(contato.getNome()))
+				if(contato.getNome().contains(this.texto))
 				{
 					this.contatos.add(contato);
 				}
@@ -97,7 +97,7 @@ public class BuscaBean implements Serializable{
 			else
 			if(tipo.equals("endereco"))
 			{
-				if(contato.getLogradouro().contains(this.texto) || this.texto.contains(contato.getLogradouro()))
+				if(contato.getLogradouro().contains(this.texto))
 				{
 					this.contatos.add(contato);
 				}
@@ -105,7 +105,7 @@ public class BuscaBean implements Serializable{
 			else
 			if(tipo.equals("email"))
 			{
-				if(contato.getEmail().contains(this.texto) || this.texto.contains(contato.getEmail()))
+				if(contato.getEmail().contains(this.texto))
 				{
 					this.contatos.add(contato);
 				}
@@ -113,8 +113,7 @@ public class BuscaBean implements Serializable{
 			else
 			if(tipo.equals("telefone"))
 			{
-				if(contato.getTelefone().contains(this.texto) || contato.getCelular().contains(this.texto)
-						|| this.texto.contains(contato.getTelefone()) || this.texto.contains(contato.getCelular()))
+				if(contato.getTelefone().contains(this.texto) || contato.getCelular().contains(this.texto))
 				{
 					this.contatos.add(contato);
 				}
@@ -124,7 +123,7 @@ public class BuscaBean implements Serializable{
 	
 	public String updateAction() {
 		
-		ControleContato controleContato = new ControleContato();
+		ControleContato controleContato = ControleContato.getInstance();
 		
 		//get all existing value but set "editable" to false
 		for (ContatoBean contato : this.contatos){

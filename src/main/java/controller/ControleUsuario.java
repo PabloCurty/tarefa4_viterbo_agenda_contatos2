@@ -6,7 +6,7 @@ import model.Agenda;
 import model.Usuario;
 import service.CadastraUsuarioService;
 
-public class ControleCadastroUsuario {
+public class ControleUsuario {
 	
 	CadastraUsuarioService cadastroUsuarioService = new CadastraUsuarioService();
 

@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import controller.ControleCadastroUsuario;
+import controller.ControleUsuario;
 import exception.UsuarioExistenteException;
 
 @ManagedBean(name = "usuarioBean")
@@ -52,7 +52,7 @@ public class UsuarioBean {
 	public String cadastraUsuario(){
 		LoginBean loginBean = null; 
 		try {
-			ControleCadastroUsuario controleCadastroUsuario = new ControleCadastroUsuario();
+			ControleUsuario controleCadastroUsuario = new ControleUsuario();
 			String acao = controleCadastroUsuario.cadastraUsuario(this);
 			FacesContext fc = FacesContext.getCurrentInstance();
 			ELContext elContext;

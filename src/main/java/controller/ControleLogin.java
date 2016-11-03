@@ -14,10 +14,14 @@ public class ControleLogin {
 		try {
 			LoginService loginService = new LoginService();
 			usuario = loginService.autentica(loginBean.getUsuario());
-			if(usuario.getPassword().equals(loginBean.getPassword())){
+			
+			if(usuario.getPassword().equals(loginBean.getPassword()))
+			{
 				loginBean.setId(usuario.getId_usuario());
 				return "success";
-			}else{
+			}
+			else
+			{
 				return "failure";
 			}
 			

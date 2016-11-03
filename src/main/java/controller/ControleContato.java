@@ -1,17 +1,26 @@
 package controller;
 
-import java.util.List;
-
 import beans.ContatoBean;
 import exception.UsuarioExistenteException;
 import model.Agenda;
 import model.Contato;
-import service.AgendaService;
 import service.ContatoService;
 
 public class ControleContato {
+	
+	private static final ControleContato controleContato = new ControleContato();
+	
+	private ControleContato()
+	{
+		
+	}
+	
+	public static ControleContato getInstance()
+	{
+		return controleContato;
+	}
 
-	public String cadastraContato(ContatoBean contatoBean, long idAgenda) {
+	public String cadastraContato(ContatoBean contatoBean, Agenda agenda) {
 		
 		try {
 			Contato contato = new Contato(contatoBean.getNome(), 
@@ -27,8 +36,6 @@ public class ControleContato {
 										  contatoBean.getOperadora(), 
 										  contatoBean.getDdi(), 
 										  contatoBean.getDdd());
-			AgendaService agendaService = new AgendaService();
-			Agenda agenda = agendaService.getAgenda(idAgenda);
 			contato.setAgenda(agenda);
 			ContatoService contatoService = new ContatoService();
 			Contato cont = contatoService.cadastraContato(contato);
@@ -39,7 +46,7 @@ public class ControleContato {
 		}
 	}
 	
-	public String removeContato(ContatoBean contatoBean)
+	public String removeContato(ContatoBean contatoBean, Agenda agenda)
 	{
 		try{
 			Contato contato = new Contato(
@@ -57,7 +64,7 @@ public class ControleContato {
 					  contatoBean.getOperadora(), 
 					  contatoBean.getDdi(), 
 					  contatoBean.getDdd(),
-					  contatoBean.getAgenda());
+					  agenda);
 			//Contato contato = getContato(contatoBean);
 			
 			ContatoService contatoService = new ContatoService();
@@ -66,22 +73,6 @@ public class ControleContato {
 		} catch (Exception e) {
 			throw new UsuarioExistenteException("Erro ao remover");
 		}
-	}
-	
-	private Contato getContato(ContatoBean contatoBean) 
-	{
-		ControleAgenda controleAgenda = new ControleAgenda();
-		@SuppressWarnings("unchecked")
-		List<Contato> contatosModel =  (List<Contato>) controleAgenda.getContatosDaAgenda(contatoBean.getAgenda().getId());
-		
-		for(Contato contato : contatosModel)
-		{
-			if(contato.getId().equals(contatoBean.getId()))
-			{
-				return contato;
-			}
-		}
-		return null;
 	}
 	
 	public String updateContato(ContatoBean contatoBean)

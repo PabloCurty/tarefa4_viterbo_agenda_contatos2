@@ -54,7 +54,7 @@ public class LoginBean implements Serializable {
 		try {
 			ControleLogin controleLogin = new ControleLogin();
 			String str = controleLogin.login(this);
-			FacesContext.getCurrentInstance().getExternalContext().getFlash().put("id", getId());
+			FacesContext.getCurrentInstance().getExternalContext().getFlash().put("id", this.getId());
 			return str;
 		} catch (Exception e) {
 			return "failure";

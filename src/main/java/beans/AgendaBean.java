@@ -10,7 +10,9 @@ import javax.faces.context.FacesContext;
 
 import controller.ControleAgenda;
 import controller.ControleContato;
+import model.Agenda;
 import model.Contato;
+import service.AgendaService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -23,19 +25,24 @@ public class AgendaBean implements Serializable{
 	
 	private List<ContatoBean> contatos = new ArrayList<ContatoBean>();
 	
-	long id;
+	private Long id;
+	
+	private Agenda agenda;
 	
 	@PostConstruct
     public void init(){
 		
-		id = (long) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("id");
+		id = (Long) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("id");
+		
+		AgendaService agendaService = new AgendaService();
+		agenda = agendaService.getAgenda(id);
 		
 		ControleAgenda controleAgenda = new ControleAgenda();
 
 		@SuppressWarnings("unchecked")
 		List<Contato> contatosModel =  (List<Contato>) controleAgenda.getContatosDaAgenda(id);
 		
-		List<ContatoBean> contatosBean = processarContatos(contatosModel);
+		List<ContatoBean> contatosBean = processarContatos(contatosModel,agenda);
 		
 		if(!contatos.isEmpty())
 		{
@@ -45,7 +52,7 @@ public class AgendaBean implements Serializable{
 		
     }
 	
-	private List<ContatoBean> processarContatos(List<Contato> contatosModel)
+	private List<ContatoBean> processarContatos(List<Contato> contatosModel, Agenda agenda)
 	{
 		List<ContatoBean> contatosBean = new ArrayList<ContatoBean>();
 		for(Contato contato : contatosModel)
@@ -65,7 +72,7 @@ public class AgendaBean implements Serializable{
 					  contato.getOperadora(), 
 					  contato.getDdi(), 
 					  contato.getDdd(),
-					  contato.getAgenda());
+					  this.agenda);
 			contatosBean.add(contatoBean);
 		}
 		return contatosBean;
@@ -82,8 +89,8 @@ public class AgendaBean implements Serializable{
 
 	public String cadastra(ContatoBean contatoBean)
 	{
-		ControleContato controleContato = new ControleContato();
-		String string = controleContato.cadastraContato(contatoBean, this.id);
+		ControleContato controleContato = ControleContato.getInstance();
+		String string = controleContato.cadastraContato(contatoBean, this.agenda);
 
 		if(string.equals("success")){
 			contatos.add(contatoBean);
@@ -96,7 +103,7 @@ public class AgendaBean implements Serializable{
 	
 	public String updateAction() {
 
-		ControleContato controleContato = new ControleContato();
+		ControleContato controleContato = ControleContato.getInstance();
 		
 		//get all existing value but set "editable" to false
 		for (ContatoBean contato : this.contatos){
@@ -128,7 +135,7 @@ public class AgendaBean implements Serializable{
 	
 	public String removeAction(ContatoBean contato) {
 		
-		ControleContato controleContato = new ControleContato();
+		ControleContato controleContato = ControleContato.getInstance();
 		
 		Iterator<ContatoBean> iter = this.contatos.iterator();
 		
@@ -138,7 +145,7 @@ public class AgendaBean implements Serializable{
 		    if (contato_.equals(contato))
 			{
 		    	try{
-			    	controleContato.removeContato(contato);
+			    	controleContato.removeContato(contato,this.agenda);
 			    	iter.remove();
 		    	}
 		    	catch(Exception e)
